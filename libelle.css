@@ -1,0 +1,32 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    background-color: #f5f5f5;
+    font-family: 'Roboto', sans-serif;
+}
+.createPost{
+    font-size: 0.6rem;  
+    
+}
+.deletePost{
+    font-size: 0.6rem;  
+}
+.row{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    padding: 0.5rem;
+    background-color: #fff;
+    border-radius: 0.5rem;
+    margin: 0.5rem;
+    box-shadow: 0 0 0.5rem rgba(0,0,0,0.1);
+    margin-top: 30px;
+}
+.imgSave{
+    height: 20%;
+    width: 35%;
+}
