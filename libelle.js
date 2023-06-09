@@ -102,7 +102,7 @@ function postTemplate(input) {
     delBtn.append(delImg, delTxt);
     delBtn.addEventListener("click", function () {
         deleteSchool(input._id);
-        school();
+        main();
 
     });
 
@@ -114,14 +114,24 @@ function postTemplate(input) {
 }
 async function school() {
     let response = await fetch('https://striveschool-api.herokuapp.com/api/product/', {
+        method: 'GET',
         headers: {
             'Authorization': APIKey
         }
     });
     let data = await response.json();
-    console.log(data);
-    resultsBox.innerHTML = "";
-    data.forEach(postTemplate);
+   return data;
 }
-school();
+ function main() {
+    let myData =[];
+    resultsBox.innerHTML = "";
+    
+    school().then(data => {
+        data.forEach(element => {
+            myData.push(element);
+            postTemplate(element);
+        });
+    });
+ }
 
+window.onload = main();
