@@ -8,10 +8,16 @@ let imageUrl = document.getElementById("url-field");
 let createButton = document.getElementById("create-btn");
 let deleteButton = document.getElementById("delete-btn");
 
-
-
-createButton.addEventListener("click", postSchool);
-deleteButton.addEventListener("click", deleteSchool);
+async function school() {
+    let response = await fetch('https://striveschool-api.herokuapp.com/api/product/', {
+        method: 'GET',
+        headers: {
+            'Authorization': APIKey
+        }
+    });
+    let data = await response.json();
+    return data;
+}
 
 
 async function postSchool() {
@@ -22,7 +28,7 @@ async function postSchool() {
         "imageUrl": imageUrl.value,
         "price": priceField.value
     };
- 
+
     await fetch('https://striveschool-api.herokuapp.com/api/product/',
 
         {
@@ -32,13 +38,13 @@ async function postSchool() {
             body: JSON.stringify(payload)
 
         });
-        
+
     nameField.value = "";
     descriptionField.value = "";
     priceField.value = "";
     imageUrl.value = "";
     brandField.value = "";
-    
+
     console.log("debug1");
 
 
@@ -56,9 +62,9 @@ async function deleteSchool(id) {
 
 
 function postTemplate(input) {
-     let myId = input._id;
+    let myId = input._id;
     let myTr = document.createElement("tr");
-     myTr.setAttribute("id", input._id);
+    myTr.setAttribute("id", input._id);
     let myName = document.createElement("td");
     myName.innerText = input.name;
     let myDesc = document.createElement("td");
@@ -76,8 +82,8 @@ function postTemplate(input) {
     const myBtns = document.createElement("td");
 
     const editBtn = document.createElement("a");
-     editBtn.href = "prodotto.html" + "?id=" + input._id;
-     editBtn.target = "_blank";
+    editBtn.href = "prodotto.html" + "?id=" + input._id;
+   
     editBtn.classList.add("btn", "btn-sm", "mx-1", "btn-primary");
     const editImg = document.createElement("i");
     editImg.classList.add("fa-solid", "fa-pencil", "me-1");
@@ -100,8 +106,10 @@ function postTemplate(input) {
     const delTxt = document.createElement("span");
     delTxt.innerText = "Delete";
     delBtn.append(delImg, delTxt);
-    delBtn.addEventListener("click", function () {
-        deleteSchool(input._id);
+    delBtn.addEventListener("click", async function () {
+        await deleteSchool(input._id);
+        resultsBox.innerHTML = "";
+
         main();
 
     });
@@ -112,26 +120,25 @@ function postTemplate(input) {
 
 
 }
-async function school() {
-    let response = await fetch('https://striveschool-api.herokuapp.com/api/product/', {
-        method: 'GET',
-        headers: {
-            'Authorization': APIKey
-        }
-    });
-    let data = await response.json();
-   return data;
-}
- function main() {
-    let myData =[];
-    resultsBox.innerHTML = "";
-    
+
+
+function main() {
+   
+   
     school().then(data => {
         data.forEach(element => {
-            myData.push(element);
+          
             postTemplate(element);
         });
     });
- }
+}
+
+createButton.addEventListener("click", async function () {
+    await postSchool();
+    resultsBox.innerHTML = "";
+
+    main();
+});
+
 
 window.onload = main();
