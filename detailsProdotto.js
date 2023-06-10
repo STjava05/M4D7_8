@@ -21,8 +21,9 @@ async function detailProduct(id) {
     imageUrl.value = data.imageUrl;
     brandField.value = data.brand;
 
-   editBtn.addEventListener("click",function(){
-    editProduct(id);
+   editBtn.addEventListener("click",async function(){
+   await editProduct(id);
+    window.location.href = "index1.html";
    })
    
 }
