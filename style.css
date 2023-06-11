@@ -37,3 +37,18 @@
 .card-brand{
   color:dodgerblue
 }
+.nav-link{
+  color: black;
+  font-weight: 700;
+  font-size: 1.2rem;
+}
+.nav-link-active{
+  color: white;
+  font-weight:400px;
+  font-size: 1.2rem;
+}
+.agenzia{
+  padding-left: 200px;
+  font-style: italic;
+  color: rgb(236, 143, 143);
+}
