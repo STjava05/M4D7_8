@@ -1,16 +1,17 @@
 
 let APIKey = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDdkZDIyOTM5N2RmMTAwMTRkZGRkYjgiLCJpYXQiOjE2ODU5Njc0MDEsImV4cCI6MTY4NzE3NzAwMX0.mckwiRK7J6ynTTRXJTgbianV3xObhtEMgG5VqomP1rI";
-
+// Ottiene il riferimento all'elemento HTML con id "products"
 let produit = document.getElementById("products");
 
-
+// Funzione asincrona per ottenere i prodotti dalla API
 async function school() {
 
     try {
+        // Effettua una richiesta GET per ottenere i prodotti dalla API
         let response = await fetch("https://striveschool-api.herokuapp.com/api/product/", { headers: { Authorization: APIKey } });
         let data = await response.json();
         console.log(data);
-
+        // Itera su ogni elemento (prodotto) ottenuto
         data.forEach(element => {
             getProduct(element);
         });
@@ -22,12 +23,14 @@ async function school() {
     }
 
 }
+// Chiama la funzione school() per ottenere i prodotti dalla API e visualizzarli
 school();
 
+// Funzione per creare un elemento card per il prodotto
 function getProduct(element) {
-
+    // Crea gli elementi HTML per la card del prodotto
     let card = document.createElement("div");
-    card.classList.add("card", "m-2" /*"col-6", "col-md-4", "col-lg-3", "col-xl-2",*/);
+    card.classList.add("card", "m-2");
     card.style.maxWidth = "16rem";
     let img = document.createElement("img");
 
@@ -48,12 +51,11 @@ function getProduct(element) {
     let brand = document.createElement("p");
     brand.classList.add("card-brand");
     brand.innerText = element.brand;
-     let cardButton = document.createElement("button");
-    // cardButton.classList.add("btn", "btn-secondary");
-    // cardButton.innerText = "Add to cart";
+    let cardButton = document.createElement("button");
     priceBox.append(price$, cardPrice);
     cardBody.append(cardName, cardDescription, priceBox, brand, cardButton);
     card.append(img, cardBody);
+     // Aggiunge la card del prodotto all'elemento HTML con id "products"
     produit.appendChild(card);
 
 

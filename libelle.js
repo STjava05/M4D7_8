@@ -8,6 +8,7 @@ let imageUrl = document.getElementById("url-field");
 let createButton = document.getElementById("create-btn");
 let deleteButton = document.getElementById("delete-btn");
 
+// Funzione asincrona per ottenere i dati dalla API
 async function school() {
     let response = await fetch('https://striveschool-api.herokuapp.com/api/product/', {
         method: 'GET',
@@ -19,7 +20,7 @@ async function school() {
     return data;
 }
 
-
+// Funzione asincrona per inviare una richiesta POST alla API
 async function postSchool() {
     let payload = {
         "name": nameField.value,
@@ -38,7 +39,7 @@ async function postSchool() {
             body: JSON.stringify(payload)
 
         });
-
+// Pulisce i campi del modulo dopo aver inviato la richiesta POST
     nameField.value = "";
     descriptionField.value = "";
     priceField.value = "";
@@ -49,6 +50,7 @@ async function postSchool() {
 
 
 }
+// Funzione asincrona per inviare una richiesta DELETE alla API
 async function deleteSchool(id) {
     let response = await fetch('https://striveschool-api.herokuapp.com/api/product/' + id, {
         method: 'DELETE',
@@ -60,7 +62,7 @@ async function deleteSchool(id) {
     });
 }
 
-
+// Funzione per creare un template HTML per i dati ricevuti dalla API
 function postTemplate(input) {
     let myId = input._id;
     let myTr = document.createElement("tr");
@@ -121,13 +123,13 @@ function postTemplate(input) {
 
 }
 
-
+// Funzione principale che viene chiamata quando la pagina si carica
 function main() {
    
-   
+    // Chiamata alla funzione school() per ottenere i dati dalla API
     school().then(data => {
         data.forEach(element => {
-          
+     // Chiama la funzione postTemplate per creare un template HTML per ogni elemento     
             postTemplate(element);
         });
     });
@@ -140,5 +142,5 @@ createButton.addEventListener("click", async function () {
     main();
 });
 
-
+// Aggiunge un listener per l'evento "onload" della finestra
 window.onload = main();

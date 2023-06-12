@@ -13,6 +13,7 @@
   margin: 0.5rem; 
    box-shadow: 0 0 0.5rem rgba(0,0,0,0.1);
   margin-top: 50px;
+  cursor: pointer;
 
 }
 .card:hover {
@@ -38,15 +39,14 @@
   color:dodgerblue
 }
 .nav-link{
-  color: black;
-  font-weight: 700;
+  color:brown ;
+  
   font-size: 1.2rem;
 }
-.nav-link-active{
-  color: white;
-  font-weight:400px;
-  font-size: 1.2rem;
+.active{
+  color: brown !important;
 }
+
 .agenzia{
   padding-left: 200px;
   font-style: italic;
